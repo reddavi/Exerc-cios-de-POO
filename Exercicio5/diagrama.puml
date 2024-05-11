@@ -1,0 +1,59 @@
+@startuml
+interface org.example.interfaceContatos {
++ void cadastraContato(String,int)
+~ Contato pesquisarContato(String)
++ boolean removerContato(String)
++ List<Contato> exibirTodosContatos()
+}
+
+class org.example.SalvarContatosException {
+}
+class org.example.MenuContatosGUI {
+- SistemaContatos listaDeContatos
++ {static} void main(String[])
+}
+
+
+class org.example.SistemaContatos {
+- GravadorDeDados gravador
+- Map<String,Contato> contatos
++ void salvarDados()
++ void recuperaDados()
++ void cadastraContato(String,int)
++ Contato pesquisarContato(String)
++ boolean removerContato(String)
++ List<Contato> exibirTodosContatos()
+}
+
+
+class org.example.RecuperacaoContatosException {
+}
+class org.example.GravadorDeDados {
++ {static} String ARQUIVO_CONTATOS
++ Map<String,Contato> recuperarContatos()
++ void salvarContatos(Map<String,Contato>)
+}
+
+
+class org.example.Contato {
+- String nome
+- int numero
++ String getNome()
++ void setNome(String)
++ int getNumero()
++ void setNumero(int)
++ String toString()
+}
+
+
+class org.example.contatoInexistenteException {
+}
+
+
+org.example.Exception <|-- org.example.SalvarContatosException
+org.example.JFrame <|-- org.example.MenuContatosGUI
+org.example.interfaceContatos <|.. org.example.SistemaContatos
+org.example.Exception <|-- org.example.RecuperacaoContatosException
+java.io.Serializable <|.. org.example.Contato
+org.example.Exception <|-- org.example.contatoInexistenteException
+@enduml
